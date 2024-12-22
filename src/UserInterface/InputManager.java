@@ -59,7 +59,7 @@ public class InputManager {
                     if(gameWorld.storyTutorial <= 3){
                         gameWorld.storyTutorial ++;
                         gameWorld.currentSize = 1;
-                        gameWorld.textTutorial = gameWorld.texts1(gameWorld.storyTutorial - 1);
+                        gameWorld.textTutorial = gameWorld.texts1[gameWorld.storyTutorial - 1];
                     }
                 }
                     
@@ -92,8 +92,7 @@ public class InputManager {
                     gameWorld.megaman.stopRun();
             break;
 
-            case KeyEvent.VK_SPACE:
-                gameWorld.megaman.jump();                
+            case KeyEvent.VK_SPACE:                              
                 
             break;
 

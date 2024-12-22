@@ -26,10 +26,10 @@ import javax.swing.JPanel;
  */
 public class GamePanel extends JPanel implements Runnable, KeyListener{
     
-    private Thread thread;
-    private boolean isRunning;
+    Thread thread;
+    private boolean isRunning = true;
 
-    private InputManager inputManger;
+    private InputManager inputManager;
     
     private BufferedImage bufImage;
     private Graphics2D buf2D;
@@ -41,30 +41,37 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
         
         gameWorld = new GameWorld();
         
-        inputManger = new InputManager(gameWorld);
+        inputManager = new InputManager(gameWorld);
         
-//        bufImage = new BufferedImage(GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
-        
-        
+//        bufImage = new BufferedImage(GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);        
                 
-        
     }
 
+    public void startGame(){
+//        if(thread == null){
+//            isRunning = true;
+//            thread = new Thread(this);
+//            thread.start();
+//        }
+        thread = new Thread(this);
+        thread.start();
+    }
+    
     @Override
     public void paint(Graphics g){
         //tao man hinh do
 //        g.setColor(java.awt.Color.WHITE);
 //        g.fillRect(0, 0, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT);
-        g.drawImage(bufImage, 0, 0, this);
+        g.drawImage(gameWorld.getBufferedImage(), 0, 0, this);
         
         
         
     }
     
-    public void UpdateGame(){
-        gameWorld.Update();
-        gameWorld.Render();
-    }
+//    public void UpdateGame(){
+//        gameWorld.Update();
+//        //gameWorld.Render();
+//    }
     
 //    public void RenderGame(){
 //        if(bufImage == null){
@@ -79,22 +86,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 //        if(buf2D != null){
 //            // vẽ ở trong đây:
 //        buf2D.setColor(java.awt.Color.WHITE);
-////        buf2D.fillRect(0, 0, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT);
+//
 //        
-//        gameWorld.Render(buf2D);
+//        gameWorld.Render();
 //       
-////        buf2D.setColor(Color.red);
-////        buf2D.fillRect(40, 50, 200, 50);
+//
 //        }
 //    }
     
-    public void startGame(){
-        if(thread == null){
-            isRunning = true;
-            thread = new Thread(this);
-            thread.start();
-        }
-    }
 
     @Override
     public void run() {
@@ -138,13 +137,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
        
-        inputManger.processKeypressed(e.getKeyCode());
+        inputManager.processKeypressed(e.getKeyCode());
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         
-        inputManger.processKeyReleased(e.getKeyCode());
+        inputManager.processKeyReleased(e.getKeyCode());
         
    
     }

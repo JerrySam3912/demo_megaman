@@ -3,25 +3,33 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/OOP/MegaMan_3/src/GameObject/Camera.java</file>
-            <file>file:/D:/OOP/MegaMan_3/src/GameObject/BackgroundMap.java</file>
             <file>file:/D:/OOP/MegaMan_3/src/GameObject/RedEyeDevil.java</file>
             <file>file:/D:/OOP/MegaMan_3/src/UserInterface/GamePanel.java</file>
             <file>file:/D:/OOP/MegaMan_3/src/GameObject/ParticularObject.java</file>
+            <file>file:/D:/OOP/MegaMan_3/src/GameObject/RobotR.java</file>
             <file>file:/D:/OOP/MegaMan_3/src/UserInterface/GameFrame.java</file>
-            <file>file:/D:/OOP/MegaMan_3/src/GameObject/RedEyeBullet.java</file>
-            <file>file:/D:/OOP/MegaMan_3/src/GameEffect/Animation.java</file>
-            <file>file:/D:/OOP/MegaMan_3/src/GameObject/Human.java</file>
+            <file>file:/D:/OOP/MegaMan_3/src/GameObject/RocketBullet.java</file>
             <file>file:/D:/OOP/MegaMan_3/src/UserInterface/InputManager.java</file>
+            <file>file:/D:/OOP/MegaMan_3/src/GameObject/DarkRaise.java</file>
             <file>file:/D:/OOP/MegaMan_3/src/GameObject/BlueFire.java</file>
             <file>file:/D:/OOP/MegaMan_3/src/GameObject/GameWorld.java</file>
+            <file>file:/D:/OOP/MegaMan_3/src/GameObject/RobotRBullet.java</file>
             <file>file:/D:/OOP/MegaMan_3/src/GameEffect/CacheDataLoader.java</file>
             <file>file:/D:/OOP/MegaMan_3/src/GameObject/ParticularObjectManager.java</file>
+            <file>file:/D:/OOP/MegaMan_3/src/GameObject/FinalBoss.java</file>
             <file>file:/D:/OOP/MegaMan_3/src/GameObject/Megaman.java</file>
+            <file>file:/D:/OOP/MegaMan_3/src/GameObject/BulletManager.java</file>
+            <file>file:/D:/OOP/MegaMan_3/src/GameObject/SmallRedGun.java</file>
+            <file>file:/D:/OOP/MegaMan_3/src/GameObject/Camera.java</file>
+            <file>file:/D:/OOP/MegaMan_3/src/GameObject/BackgroundMap.java</file>
+            <file>file:/D:/OOP/MegaMan_3/src/GameObject/RedEyeBullet.java</file>
+            <file>file:/D:/OOP/MegaMan_3/src/GameObject/YellowFlowerBullet.java</file>
+            <file>file:/D:/OOP/MegaMan_3/src/GameEffect/Animation.java</file>
+            <file>file:/D:/OOP/MegaMan_3/src/GameObject/Human.java</file>
+            <file>file:/D:/OOP/MegaMan_3/src/GameObject/DarkRaiseBullet.java</file>
             <file>file:/D:/OOP/MegaMan_3/src/GameObject/PhysicalMap.java</file>
             <file>file:/D:/OOP/MegaMan_3/src/GameEffect/FrameImage.java</file>
             <file>file:/D:/OOP/MegaMan_3/src/GameObject/Bullet.java</file>
-            <file>file:/D:/OOP/MegaMan_3/src/GameObject/BulletManager.java</file>
             <file>file:/D:/OOP/MegaMan_3/src/GameObject/GameObject.java</file>
         </group>
     </open-files>

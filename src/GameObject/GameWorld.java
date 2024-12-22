@@ -33,18 +33,18 @@ public class GameWorld {
 
     public static final int finalBossX = 3600;
     
-    public static final int INIT_GAME = 0;
+    public static final int PAUSEGAME =0;
     public static final int TUTORIAL = 1;
     public static final int GAMEPLAY = 2;
     public static final int GAMEOVER = 3;
     public static final int GAMEWIN = 4;
-    public static final int PAUSEGAME = 5;
+    
     
     public static final int INTROGAME = 0;
     public static final int MEETFINALBOSS = 1;
     
     public int openIntroGameY = 0;
-    public int state = INIT_GAME;
+    public int state = PAUSEGAME;
     public int previousState = state;
     public int tutorialState = INTROGAME;
     
@@ -250,7 +250,7 @@ public class GameWorld {
     public void Update(){
         
         switch(state){
-            case INIT_GAME:
+            case PAUSEGAME:
                 
                 break;
             case TUTORIAL:
@@ -321,18 +321,13 @@ public class GameWorld {
             //physicalMap.draw(g2);
             
             switch(state){
-                case INIT_GAME:
+                case PAUSEGAME:
                     g2.setColor(Color.BLACK);
                     g2.fillRect(0, 0, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT);
                     g2.setColor(Color.WHITE);
                     g2.drawString("PRESS ENTER TO CONTINUE", 400, 300);
                     break;
-                case PAUSEGAME:
-                    g2.setColor(Color.BLACK);
-                    g2.fillRect(300, 260, 500, 70);
-                    g2.setColor(Color.WHITE);
-                    g2.drawString("PRESS ENTER TO CONTINUE", 400, 300);
-                    break;
+                
                 case TUTORIAL:
                     backgroundMap.draw(g2);
                     if(tutorialState == MEETFINALBOSS){
@@ -375,8 +370,10 @@ public class GameWorld {
         }
 
     }
-
     
-
+    public BufferedImage getBufferedImage(){
+        return bufferedImage;
+    }
     
+   
 }
