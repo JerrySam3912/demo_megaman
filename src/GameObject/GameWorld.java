@@ -11,13 +11,14 @@ import UserInterface.GamePanel;
 import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 /**
  *
  * @author ADMIN
  */
-public class GameWorld {
+public class GameWorld extends State{
        
      private BufferedImage bufferedImage;
     private int lastState;
@@ -25,7 +26,7 @@ public class GameWorld {
     public ParticularObjectManager particularObjectManager;
     public BulletManager bulletManager;
 
-    public Megaman megaman;
+    public Megaman megaMan;
    
     public PhysicalMap physicalMap;
     public BackgroundMap backgroundMap;
@@ -64,25 +65,26 @@ public class GameWorld {
     
     public AudioClip bgMusic;
     
-    public GameWorld(){
-            
+    public GameWorld(GamePanel gamePanel){
+            super(gamePanel);
         
         texts1[0] = "We are heros, and our mission is protecting our Home\nEarth....";
-        texts1[1] = "There was a Monster from University on Earth in 10 years\n" + "and we lived in the scare in that 10 years....";
+        texts1[1] = "There was a Monster from University on Earth in 10 years\n"
+                + "and we lived in the scare in that 10 years....";
         texts1[2] = "Now is the time for us, kill it and get freedom!....";
         texts1[3] = "      LET'S GO!.....";
         textTutorial = texts1[0];
 
         
         bufferedImage = new BufferedImage(GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
-        megaman = new Megaman(400, 400, this);
+        megaMan = new Megaman(400, 400, this);
         physicalMap = new PhysicalMap(0, 0, this);
         backgroundMap = new BackgroundMap(0, 0, this);
         camera = new Camera(0, 50, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT, this);
         bulletManager = new BulletManager(this);
         
         particularObjectManager = new ParticularObjectManager(this);
-        particularObjectManager.addObject(megaman);
+        particularObjectManager.addObject(megaMan);
         
         initEnemies();
 
@@ -178,18 +180,18 @@ public class GameWorld {
                         camera.setPosX(camera.getPosX() + 2);
                     }
                     
-                    if(megaman.getPosX() < finalBossX + 150){
-                        megaman.setDirection(ParticularObject.RIGHT_DIR);
-                        megaman.run();
-                        megaman.Update();
+                    if(megaMan.getPosX() < finalBossX + 150){
+                        megaMan.setDirection(ParticularObject.RIGHT_DIR);
+                        megaMan.run();
+                        megaMan.Update();
                     }else{
-                        megaman.stopRun();
+                        megaMan.stopRun();
                     }
                     
-                    if(openIntroGameY < 450 && camera.getPosX() >= finalBossX && megaman.getPosX() >= finalBossX + 150){ 
+                    if(openIntroGameY < 450 && camera.getPosX() >= finalBossX && megaMan.getPosX() >= finalBossX + 150){ 
                         camera.lock();
                         storyTutorial++;
-                        megaman.stopRun();
+                        megaMan.stopRun();
                         physicalMap.phys_map[14][120] = 1;
                         physicalMap.phys_map[15][120] = 1;
                         physicalMap.phys_map[16][120] = 1;
@@ -265,7 +267,7 @@ public class GameWorld {
                 camera.Update();
                 
                 
-                if(megaman.getPosX() > finalBossX && finalbossTrigger){
+                if(megaMan.getPosX() > finalBossX && finalbossTrigger){
                     finalbossTrigger = false;
                     switchState(TUTORIAL);
                     tutorialState = MEETFINALBOSS;
@@ -279,13 +281,13 @@ public class GameWorld {
 
                 }
                 
-                if(megaman.getState() == ParticularObject.DEATH){
+                if(megaMan.getState() == ParticularObject.DEATH){
                     numberOfLife --;
                     if(numberOfLife >= 0){
-                        megaman.setBlood(100);
-                        megaman.setPosY(megaman.getPosY() - 50);
-                        megaman.setState(ParticularObject.NOBEHURT);
-                        particularObjectManager.addObject(megaman);
+                        megaMan.setBlood(100);
+                        megaMan.setPosY(megaMan.getPosY() - 50);
+                        megaMan.setState(ParticularObject.NOBEHURT);
+                        particularObjectManager.addObject(megaMan);
                     }else{
                         switchState(GAMEOVER);
                         bgMusic.stop();
@@ -350,7 +352,7 @@ public class GameWorld {
                     g2.setColor(Color.GRAY);
                     g2.fillRect(19, 59, 102, 22);
                     g2.setColor(Color.red);
-                    g2.fillRect(20, 60, megaman.getBlood(), 20);
+                    g2.fillRect(20, 60, megaMan.getBlood(), 20);
                     
                     for(int i = 0; i < numberOfLife; i++){
                         g2.drawImage(CacheDataLoader.getInstance().getFrameImage("hearth").getImage(), 20 + i*40, 18, null);
@@ -376,7 +378,104 @@ public class GameWorld {
 
     }
 
-    
+    public BufferedImage getBufferedImage(){
+        return bufferedImage;
+    }
 
-    
+    @Override
+    public void setPressedButton(int code) {
+       switch(code){
+            
+            case KeyEvent.VK_DOWN:
+                megaMan.dick();
+                break;
+                
+            case KeyEvent.VK_RIGHT:
+                megaMan.setDirection(megaMan.RIGHT_DIR);
+                megaMan.run();
+                break;
+                
+            case KeyEvent.VK_LEFT:
+                megaMan.setDirection(megaMan.LEFT_DIR);
+                megaMan.run();
+                break;
+                
+            case KeyEvent.VK_ENTER:
+                if(state == GameWorld.INIT_GAME){
+                    if(previousState == GameWorld.GAMEPLAY)
+                        switchState(GameWorld.GAMEPLAY);
+                    else switchState(GameWorld.TUTORIAL);
+                    
+                    bgMusic.loop();
+                }
+                if(state == GameWorld.TUTORIAL && storyTutorial >= 1){
+                    if(storyTutorial<=3){
+                        storyTutorial ++;
+                        currentSize = 1;
+                        textTutorial = texts1[storyTutorial-1];
+                    }else{
+                        switchState(GameWorld.GAMEPLAY);
+                    }
+                    
+                    // for meeting boss tutorial
+                    if(tutorialState == GameWorld.MEETFINALBOSS){
+                        switchState(GameWorld.GAMEPLAY);
+                    }
+                }
+                break;
+                
+            case KeyEvent.VK_SPACE:
+                megaMan.jump();
+                break;
+                
+            case KeyEvent.VK_A:
+                megaMan.attack();
+                break;
+                
+        }}
+
+    @Override
+    public void setReleasedButton(int code) {
+        switch(code){
+            
+            case KeyEvent.VK_UP:
+                
+                break;
+                
+            case KeyEvent.VK_DOWN:
+                megaMan.standUp();
+                break;
+                
+            case KeyEvent.VK_RIGHT:
+                if(megaMan.getSpeedX() > 0)
+                    megaMan.stopRun();
+                break;
+                
+            case KeyEvent.VK_LEFT:
+                if(megaMan.getSpeedX() < 0)
+                    megaMan.stopRun();
+                break;
+                
+            case KeyEvent.VK_ENTER:
+                if(state == GAMEOVER || state == GAMEWIN) {
+                    gamePanel.setState(new MenuState(gamePanel));
+                } else if(state == PAUSEGAME) {
+                    state = lastState;
+                }
+                break;
+                
+            case KeyEvent.VK_SPACE:
+                
+                break;
+                
+            case KeyEvent.VK_A:
+                
+                break;
+            case KeyEvent.VK_ESCAPE:
+                lastState = state;
+                state = PAUSEGAME;
+                break;
+                
+        }
+    }   
 }

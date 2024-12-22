@@ -61,7 +61,7 @@ public class RobotR extends ParticularObject {
     public void Update(){
         super.Update();
         
-        if(getPosX() - getGameWorld().megaman.getPosX() > 0) setDirection(ParticularObject.RIGHT_DIR);
+        if(getPosX() - getGameWorld().megaMan.getPosX() > 0) setDirection(ParticularObject.RIGHT_DIR);
         else setDirection(ParticularObject.LEFT_DIR);
         
         if(getPosX() < x1)

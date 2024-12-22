@@ -8,7 +8,8 @@ package GameObject;
  *
  * @author ADMIN
  */
-public class Camera extends GameObject{
+public class Camera extends GameObject {
+
     private float widthView;
     private float heightView;
     
@@ -36,7 +37,7 @@ public class Camera extends GameObject{
         
         if(!isLocked){
         
-            Megaman mainCharacter = getGameWorld().megaman;
+            Megaman mainCharacter = getGameWorld().megaMan;
 
             if(mainCharacter.getPosX() - getPosX() > 400) setPosX(mainCharacter.getPosX() - 400);
             if(mainCharacter.getPosX() - getPosX() < 200) setPosX(mainCharacter.getPosX() - 200);
@@ -62,4 +63,5 @@ public class Camera extends GameObject{
     public void setHeightView(float heightView) {
         this.heightView = heightView;
     }
+    
 }

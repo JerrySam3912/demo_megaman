@@ -38,8 +38,8 @@ public class DarkRaise extends ParticularObject{
     @Override
     public void attack() {
     
-        float megamanX = getGameWorld().megaman.getPosX();
-        float megamanY = getGameWorld().megaman.getPosY();
+        float megamanX = getGameWorld().megaMan.getPosX();
+        float megamanY = getGameWorld().megaMan.getPosY();
         
         float deltaX = megamanX - getPosX();
         float deltaY = megamanY - getPosY();
