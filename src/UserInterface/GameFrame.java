@@ -4,8 +4,6 @@ import GameEffect.CacheDataLoader;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 /**
  *
